@@ -5,9 +5,9 @@
     </div>
     <div class="links">
       <ul>
-        <li><router-link to="/#works" exact>Work</router-link></li>
-        <li><router-link :to="resumeLink" target="_blank">Resume</router-link></li>
-        <li><router-link to="/about" exact>About</router-link></li>
+        <li><router-link to="/#works" exact>work</router-link></li>
+        <li><router-link :to="resumeLink" target="_blank">resume</router-link></li>
+        <li><router-link to="/about" exact>about</router-link></li>
       </ul>
     </div>
   </div>
@@ -67,8 +67,15 @@ export default {
             font-size: 16px;
             font-weight: 800;
             opacity: 0.3;
+            transition: .3s ease-in-out;
             &.router-link-active {
               opacity: 1;
+              /*color: #519BF4;*/
+              text-decoration: underline;
+            }
+            &:hover {
+              opacity: 1;
+              color: #519BF4;
               text-decoration: underline;
             }
           }

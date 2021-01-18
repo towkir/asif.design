@@ -1,7 +1,7 @@
 <template>
   <div id="footer">
     <div class="learn-more">
-      <router-link to="/about">Learn more about me</router-link>
+      <span>stay connected with me</span>
     </div>
     <div class="social">
       <ul>
@@ -27,36 +27,50 @@
         </li>
       </ul>
     </div>
-    <div class="action">
-      <span>Scroll down <img src="@/assets/images/icons/arrow-down.svg" class="icon"></span>
+    <div class="action" v-if="!reachedBottom" v-on:click="scrollOneFold()">
+      <span>scroll down <img src="@/assets/images/icons/arrow-down.svg" class="icon"></span>
+    </div>
+    <div class="action" v-else v-on:click="scrollToTop()">
+      <span>back to top <img src="@/assets/images/icons/arrow-down.svg"
+                               class="icon up-side-down"></span>
     </div>
   </div>
 </template>
 
 <script>
+import $ from 'jquery';
+
 export default {
   name: 'Footer',
+  data() {
+    return {
+      currentPage: 1,
+      reachedBottom: false,
+    };
+  },
   methods: {
-    scrollToElement(selectedFrame) {
-      window.scrollTo({
-        top: selectedFrame.offsetTop,
-        left: 0,
-        behavior: 'smooth',
-      });
+    scrollOneFold() {
+      $('html, body').animate({ scrollTop: window.scrollY + window.innerHeight }, 1000);
+    },
+    scrollToTop() {
+      $('html, body').animate({ scrollTop: 0 }, 1500);
     },
     checkScrollPosition() {
-      const page = window.scrollY > window.innerHeight
-        ? document.body.scrollHeight / window.scrollY : 0;
-      if (page > 3) {
-        console.log(page);
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        // you're at the bottom of the page
+        this.reachedBottom = true;
+      } else {
+        this.reachedBottom = false;
       }
+      this.currentPage = Math.ceil(window.scrollY > window.innerHeight
+        ? document.body.scrollHeight / window.scrollY : 0);
     },
   },
   mounted() {
-    // window.addEventListener('scroll', this.checkScrollPosition);
+    window.addEventListener('scroll', this.checkScrollPosition);
   },
   destroyed() {
-    // window.removeEventListener('scroll', this.checkScrollPosition);
+    window.removeEventListener('scroll', this.checkScrollPosition);
   },
 };
 </script>
@@ -66,9 +80,11 @@ export default {
     padding: 20px 100px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    flex-direction: column;
     .learn-more {
-      a {
+      margin-bottom: 15px;
+      span {
         text-decoration: none;
         font-size: 16px;
         font-weight: 600;
@@ -78,6 +94,7 @@ export default {
     .social {
       ul {
         list-style: none;
+        margin-bottom: 10px;
         li {
           display: inline-block;
           a {
@@ -110,7 +127,7 @@ export default {
       right: 100px;
       cursor: pointer;
       font-size: 16px;
-      display: none;
+      /*display: none;*/
       img.icon {
         margin: 0 10px;
         padding: 8px;
@@ -122,6 +139,9 @@ export default {
         opacity: 0.3;
         transition: 0.3s ease-in-out;
         vertical-align: middle;
+        &.up-side-down {
+          transform: scale(-1);
+        }
       }
       &:hover {
         img.icon {

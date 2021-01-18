@@ -91,7 +91,7 @@ export default {
 
 <style lang="less" scoped>
   .wrapper {
-    padding: 100px;
+    padding: 100px 100px 20px;
     width: 100%;
     height: 100%;
     min-height: 100vh;

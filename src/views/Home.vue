@@ -6,7 +6,8 @@
         <h1>Hi, I'm Asif!</h1>
         <h4>Currently, a UXer @<span>Sheba.xyz</span></h4>
         <p>
-          I'm a Product Designer with a foundation in UX and Service Design; pursuing Bachelors of
+          I'm a Product Designer with a foundation in UX and Interaction Design; <br>
+          pursuing Bachelors of
           Computer Science @<span>Brac University</span>
         </p>
         <p>
@@ -17,13 +18,13 @@
     <div class="works" id="works">
       <div class="image">
         <img src="@/assets/images/chevval.png" class="preview">
-        <div class="summary">
-          <p class="duration"><span>Duration:</span> 6 months</p>
-          <p class="time">(Jan 2018 - June 2018)</p>
-        </div>
+<!--        <div class="summary">-->
+<!--          <p class="time">(Jan 2018 - June 2018)</p>-->
+<!--        </div>-->
       </div>
       <div class="contents">
         <h4 class="title"><span class="chevval">Chevval</span> — a makeup enthusiasts hub</h4>
+        <p class="duration"><span>Duration:</span> 6 months</p>
         <p class="details">
           Chevval helps to decrease the hassle to beautify yourself! Discover best makeup artists &
           beauty salons recommended by users from all over the country.
@@ -36,7 +37,7 @@
         </ul>
         <p>
           <a href="https://drive.google.com/file/d/1hIi0tGtYkL7V3zccc_W86KsOToNd_DjP/view?usp=sharing"
-             target="_blank" class="orange">View Case Study</a>
+             target="_blank" class="blue">view case study</a>
           <span>(10 minute read)</span>
         </p>
       </div>
@@ -44,13 +45,13 @@
     <div class="works">
       <div class="image">
         <img src="@/assets/images/go-11.png" class="preview">
-        <div class="summary">
-          <p class="duration"><span>Duration:</span> 2 years</p>
-          <p class="time">(Nov 2018 - Nov 2020)</p>
-        </div>
+<!--        <div class="summary">-->
+<!--          <p class="time">(Nov 2018 - Nov 2020)</p>-->
+<!--        </div>-->
       </div>
       <div class="contents">
         <h4 class="title"><span class="go-11">GameOf11</span> — a fantasy gaming platform</h4>
+        <p class="duration"><span>Duration:</span> 2 years</p>
         <p class="details">
           GameOf11 is the first ever user focused fantasy gaming platform in Bangladesh where
           participants can play cricket and football fantasy leagues.
@@ -61,7 +62,7 @@
           <li>Coordinated with team members to ensure consistency in design</li>
         </ul>
         <p>
-          <button class="orange" disabled>View Case Study</button>
+          <button class="blue" disabled>view case study</button>
           <span>(Coming Soon!)</span>
         </p>
       </div>
@@ -69,13 +70,13 @@
     <div class="works">
       <div class="image">
         <img src="@/assets/images/swap.png" class="preview">
-        <div class="summary">
-          <p class="duration"><span>Duration:</span> 9 months</p>
-          <p class="time">(Nov 2019 - Jul 2020)</p>
-        </div>
+<!--        <div class="summary">-->
+<!--          <p class="time">(Nov 2019 - Jul 2020)</p>-->
+<!--        </div>-->
       </div>
       <div class="contents">
         <h4 class="title"><span class="swap">SWAP</span> — a multiverse online marketplace</h4>
+        <p class="duration"><span>Duration:</span> 9 months</p>
         <p class="details">
           SWAP is the combination of the e-commerce and re-commerce marketplace in Bangladesh where
           customers can purchase as well as sell products.
@@ -87,7 +88,7 @@
             core & functions and features</li>
         </ul>
         <p>
-          <button class="orange" disabled>View Case Study</button>
+          <button class="blue" disabled>view case study</button>
           <span>(Coming Soon!)</span>
         </p>
       </div>
@@ -107,7 +108,8 @@
 
 <script>
 // @ is an alias to /src
-
+import $ from 'jquery';
+import debounce from 'debounce';
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
 
@@ -116,7 +118,22 @@ export default {
   components: {
     Footer,
     Header,
-    // HelloWorld,
+  },
+  data() {
+    return {
+      // debounce: null,
+    };
+  },
+  methods: {
+    test() {
+      console.log('debounce works');
+    },
+    assign() {
+      $(window).on('scroll', debounce(this.test, 500));
+    },
+  },
+  mounted() {
+    // this.assign();
   },
 };
 </script>
@@ -146,6 +163,14 @@ export default {
         background-color: #E08867;
       }
     }
+  }
+  a.blue, button.blue {
+    appearance: none;
+    font-size: 24px;
+    color: #519BF4;
+    border: 0;
+    text-decoration: underline;
+    font-weight: bold;
   }
   .home {
     .intro, .works, .conclusion {
@@ -195,7 +220,9 @@ export default {
         width: 40%;
         img {
           display: block;
-          margin: 0 auto 20px;
+          margin: 0 0 20px auto;
+          max-width: 100%;
+          max-height: 350px;
         }
         .summary {
           text-align: center;
@@ -220,7 +247,7 @@ export default {
         .title {
           font-size: 34px;
           font-weight: normal;
-          margin-bottom: 25px;
+          margin-bottom: 15px;
           color: #11354C;
           span {
             &.go-11 {
@@ -234,10 +261,17 @@ export default {
             }
           }
         }
+        p.duration {
+          font-size: 16px;
+          margin-bottom: 10px;
+          span {
+            font-weight: bold;
+          }
+        }
         p {
           color: #2E3033;
-          font-size: 24px;
-          margin-bottom: 25px;
+          font-size: 18px;
+          margin-bottom: 15px;
           position: relative;
           button, a {
             & + span {
